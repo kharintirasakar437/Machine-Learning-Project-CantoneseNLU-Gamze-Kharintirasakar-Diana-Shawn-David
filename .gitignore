@@ -1,0 +1,61 @@
+# --- Benchmark data: never redistributed from this repository ---------------
+# The CantoNLU repository ships no LICENSE file, so we keep its data local and
+# document it in the data card instead. See data/README.md for how to fetch it.
+data/*
+!data/README.md
+!data/.gitkeep
+canto-nlu/
+
+# --- Local working notes: not part of the submitted repository --------------
+CLAUDE.md
+.claude/
+docs/
+
+# --- Secrets ---------------------------------------------------------------
+.env
+.env.*
+!.env.example
+
+# --- Model / embedding caches (LaBSE etc. are downloaded, not committed) ----
+models/
+embeddings/
+*.pt
+*.bin
+*.safetensors
+.cache/
+sentence_transformers_cache/
+huggingface/
+
+# --- Python ----------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+env/
+.python-version
+
+# --- Notebooks -------------------------------------------------------------
+.ipynb_checkpoints/
+
+# --- Tooling ---------------------------------------------------------------
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# --- Editors / OS ----------------------------------------------------------
+.vscode/
+.idea/
+Thumbs.db
+Desktop.ini
+ehthumbs.db
+$RECYCLE.BIN/
+*~
+
+# Note: result tables such as results_valid.csv and figures under results/ ARE
+# tracked on purpose - every reported number must regenerate from a script, and
+# the committed table is what we compare regenerated output against.
