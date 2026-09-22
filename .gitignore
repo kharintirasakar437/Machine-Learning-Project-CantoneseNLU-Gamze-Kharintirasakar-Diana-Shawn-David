@@ -1,0 +1,27 @@
+# Raw datasets
+data/ld/
+data/sentiment/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Secrets
+.env
+.env.*
+
+# Model files / embeddings
+models/
+embeddings/
+*.pt
+*.bin
+*.safetensors
+
+# OS files
+Thumbs.db
+.DS_Store
