@@ -6,17 +6,6 @@ This file is the team's contribution record, required at M6 and used as evidence
 individual defence. Student numbers are deliberately **not** listed here; they are in the signed
 teamwork contract. Keep entries short, factual and dated, and add them as the work happens rather
 than at the end of a milestone.
-Entries should be added as work is completed rather than reconstructed at the end of the semester.
-
-Evidence may include:
-
-- pull request number
-- commit hash
-- file path
-- notebook
-- meeting date
-- document link
-- code review
 
 ## Team Members
 
@@ -44,7 +33,7 @@ experience with data preparation, modelling, training, evaluation, documentation
 
 - One row per unit of work, newest last, under the milestone it belongs to.
 - **Evidence** must be something a reader can open: a PR number, a commit hash, a file path, a
-  meeting date, or a document link. "Helped with modelling" is not evidence.
+  notebook, a meeting date, a code review, or a document link. "Helped with modelling" is not evidence.
 - Substantial pull requests are reviewed by at least one other member before merging; record the
   reviewer, because review is a contribution too.
 - If AI assistance was used for a task, the task is also logged in [AI_USE.md](AI_USE.md); this
@@ -64,7 +53,7 @@ agreed edits from the contract revision notes to the contract.
 
 | Date | Member | Contribution | Evidence | Reviewed by |
 |---|---|---|---|---|
-| | | | | |
+| 2026-09-23 | Gamze Esen-Erdemir | Resolved merge conflicts and removed duplicated sections after PR #4 (`README.md`, `AI_USE.md`, `CONTRIBUTIONS.md`, `requirements.txt`) | Branch `fix-duplicate-docs` | *pending* |
 
 ## M3 — Baseline reproduction (due Oct 19, 2026)
 
@@ -97,5 +86,4 @@ submitted.
 
 | Date | Member | Contribution | Evidence | Reviewed by |
 |---|---|---|---|---|
-| | | | | |
 | | | | | |
