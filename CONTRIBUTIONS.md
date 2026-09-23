@@ -6,6 +6,25 @@ This file is the team's contribution record, required at M6 and used as evidence
 individual defence. Student numbers are deliberately **not** listed here; they are in the signed
 teamwork contract. Keep entries short, factual and dated, and add them as the work happens rather
 than at the end of a milestone.
+Entries should be added as work is completed rather than reconstructed at the end of the semester.
+
+Evidence may include:
+
+- pull request number
+- commit hash
+- file path
+- notebook
+- meeting date
+- document link
+- code review
+
+## Team Members
+
+- Kharintirasakar Uthayanan
+- David Zajac
+- Diana Riyahi
+- Shawn Xiao
+- Gamze Esen-Erdemir
 
 ## Principal roles (teamwork contract, Section B)
 
@@ -78,4 +97,5 @@ submitted.
 
 | Date | Member | Contribution | Evidence | Reviewed by |
 |---|---|---|---|---|
+| | | | | |
 | | | | | |

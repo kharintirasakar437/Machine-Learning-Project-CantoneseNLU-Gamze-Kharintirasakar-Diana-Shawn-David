@@ -1,22 +1,22 @@
-# --- Benchmark data: never redistributed from this repository ---------------
+# --- Benchmark data: keep local, do not commit -------------------------------
 # The CantoNLU repository ships no LICENSE file, so we keep its data local and
-# document it in the data card instead. See data/README.md for how to fetch it.
+# document source/licensing details in the data card and data/README.md.
 data/*
 !data/README.md
 !data/.gitkeep
 canto-nlu/
 
-# --- Local working notes: not part of the submitted repository --------------
+# --- Local working notes: not part of submitted repository ------------------
 CLAUDE.md
 .claude/
 docs/
 
-# --- Secrets ---------------------------------------------------------------
+# --- Secrets ----------------------------------------------------------------
 .env
 .env.*
 !.env.example
 
-# --- Model / embedding caches (LaBSE etc. are downloaded, not committed) ----
+# --- Model / embedding caches -----------------------------------------------
 models/
 embeddings/
 *.pt
@@ -26,7 +26,7 @@ embeddings/
 sentence_transformers_cache/
 huggingface/
 
-# --- Python ----------------------------------------------------------------
+# --- Python -----------------------------------------------------------------
 __pycache__/
 *.py[cod]
 *.egg-info/
@@ -37,25 +37,26 @@ venv/
 env/
 .python-version
 
-# --- Notebooks -------------------------------------------------------------
+# --- Jupyter ----------------------------------------------------------------
 .ipynb_checkpoints/
 
-# --- Tooling ---------------------------------------------------------------
+# --- Tooling ----------------------------------------------------------------
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
 .coverage
 htmlcov/
 
-# --- Editors / OS ----------------------------------------------------------
+# --- Editors / OS -----------------------------------------------------------
 .vscode/
 .idea/
 Thumbs.db
 Desktop.ini
 ehthumbs.db
 $RECYCLE.BIN/
+.DS_Store
 *~
 
-# Note: result tables such as results_valid.csv and figures under results/ ARE
-# tracked on purpose - every reported number must regenerate from a script, and
-# the committed table is what we compare regenerated output against.
+# Note:
+# Result tables and figures under results/ are intentionally tracked.
+# Any reported result should be reproducible from scripts in this repository.
