@@ -1,9 +1,6 @@
 # AI Use Log
 
-Course: CSCI 3052U Machine Learning I  
-Group 3 — Team CantoneseNLU
-
-This file records AI assistance used during the project.
+Course: CSCI 3052U Machine Learning I — Group 3 (Team CantoneseNLU).
 
 Policy (from the teamwork contract and course spec): AI assistance is logged here **at the time of
 use**, not reconstructed later. Generative models studied as an *object of the experiment* (the
@@ -18,15 +15,10 @@ research data, not assistance.
 | 2026-09-21 | David Zajac | ChatGPT | Helped plan next steps for Milestone 2 and organize the repository and data workflow. | Checked the recommendations against the Milestone 2 requirements and the current project plan. |
 | 2026-09-21 | David Zajac | Claude Code | Inspected the CantoNLU repository to locate relevant datasets, splits, labels, preprocessing code, and possible data-quality issues. | The repository was inspected in read-only mode and the findings were reviewed before being used for project planning. |
 | 2026-09-22 | David Zajac | ChatGPT | Helped interpret the CantoNLU repository findings and draft documentation such as `README.md`, `data/README.md`, and `DATA_CARD.md`. | Content was reviewed against the repository findings and course requirements before being added. |
+| 2026-09-23 | Gamze Esen-Erdemir | Claude Code | Resolved merge conflicts between `main` and `m2-data-documentation` and removed duplicated sections introduced by the PR #4 merge (`README.md`, `AI_USE.md`, `CONTRIBUTIONS.md`, `requirements.txt`). | Changes reviewed by Gamze before commit; PR reviewed by another member. |
 
 ## Section 2 — Generative models as an object of study
 
-None yet. A small pilot evaluation of one generative LLM on one task is currently a stretch goal for M4. If completed, the model, prompt, settings, date, task, and dataset split will be recorded here.
-| # | Date | Member | Tool / model | What it was used for | How the output was checked |
-|---|---|---|---|---|---|
-
-## Section 2 — Generative models as an object of study
-
-Nothing yet. The pilot evaluation (one model, one task) is a stretch goal for M4; if it runs, record
+None yet. The pilot evaluation (one model, one task) is a stretch goal for M4; if it runs, record
 the model name and version, the exact prompt, the decoding settings, the date, and the task and
 split used.

@@ -3,5 +3,3 @@ pandas
 scikit-learn
 matplotlib
 jupyter
-pandas
-scikit-learn
