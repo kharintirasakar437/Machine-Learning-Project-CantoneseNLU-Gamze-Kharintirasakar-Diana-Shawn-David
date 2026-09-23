@@ -22,8 +22,6 @@ The project currently focuses on:
 - **Sentiment analysis**
 - **Language detection**
 
-A third task may be considered only if the first two are completed successfully and time permits.
-
 The goal is not necessarily to outperform pretrained language models. Instead, we want to determine how much performance can be achieved using simpler methods and where pretrained representations provide a clear advantage.
 
 ## Research Questions
@@ -36,21 +34,21 @@ The goal is not necessarily to outperform pretrained language models. Instead, w
 
 | Tier | Model | Status |
 |---|---|---|
-| Naive | Majority-class prediction | Planned |
-| Naive | Stratified-random prediction | Planned |
-| Classical | Character n-gram TF-IDF + Multinomial Naive Bayes | Planned |
-| Classical | Character n-gram TF-IDF + L2 logistic regression | Planned |
-| Embedding | kNN on fixed multilingual sentence embeddings | Planned |
-| Complex | Gradient boosting or MLP | Optional |
+| Naive | Majority-class prediction | committed |
+| Naive | Stratified-random prediction | committed |
+| Classical | Character n-gram (1-3) TF-IDF + Multinomial Naive Bayes | committed |
+| Classical | Character n-gram (1-3) TF-IDF + L2 logistic regression | committed |
+| Embedding | kNN on fixed multilingual sentence embeddings (LaBSE, inference only) | committed |
+| Complex | Gradient boosting or MLP | Optional, only if feasability is confirmed |
 | Stretch | Pilot zero-/few-shot evaluation of one generative LLM on one task | Stretch goal |
 
 ## Experimental Protocol
 
-The following rules guide the experiments:
+These rules come from the M1 proposal and are not negotiable per-experiment:
 
 - The **training split** is used to fit models.
 - The **validation split** is used for model selection and hyperparameter tuning.
-- The **test split** is reserved for final evaluation.
+- **The test split is used once**, for the final reported evaluation. All model selection and hyperparameter tuning happen on the **validation** split.
 - TF-IDF vectorizers, scalers, and other fitted preprocessing tools will be fitted using training data only.
 - The proposed primary metric is **macro-F1**.
 - Secondary measures include:

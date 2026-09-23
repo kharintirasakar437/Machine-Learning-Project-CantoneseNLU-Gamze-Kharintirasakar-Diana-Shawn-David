@@ -1,10 +1,5 @@
 # Contributions
 
-Course: CSCI 3052U Machine Learning I  
-Group 3 — Team CantoneseNLU
-
-# Contributions
-
 Course: CSCI 3052U Machine Learning I — Group 3 (Team CantoneseNLU).
 
 This file is the team's contribution record, required at M6 and used as evidence for the M7

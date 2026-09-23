@@ -1,27 +1,62 @@
-# Raw datasets
-data/ld/
-data/sentiment/
+# --- Benchmark data: keep local, do not commit -------------------------------
+# The CantoNLU repository ships no LICENSE file, so we keep its data local and
+# document source/licensing details in the data card and data/README.md.
+data/*
+!data/README.md
+!data/.gitkeep
+canto-nlu/
 
-# Python
-__pycache__/
-*.pyc
-.venv/
-venv/
+# --- Local working notes: not part of submitted repository ------------------
+CLAUDE.md
+.claude/
+docs/
 
-# Jupyter
-.ipynb_checkpoints/
-
-# Secrets
+# --- Secrets ----------------------------------------------------------------
 .env
 .env.*
+!.env.example
 
-# Model files / embeddings
+# --- Model / embedding caches -----------------------------------------------
 models/
 embeddings/
 *.pt
 *.bin
 *.safetensors
+.cache/
+sentence_transformers_cache/
+huggingface/
 
-# OS files
+# --- Python -----------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+env/
+.python-version
+
+# --- Jupyter ----------------------------------------------------------------
+.ipynb_checkpoints/
+
+# --- Tooling ----------------------------------------------------------------
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# --- Editors / OS -----------------------------------------------------------
+.vscode/
+.idea/
 Thumbs.db
+Desktop.ini
+ehthumbs.db
+$RECYCLE.BIN/
 .DS_Store
+*~
+
+# Note:
+# Result tables and figures under results/ are intentionally tracked.
+# Any reported result should be reproducible from scripts in this repository.
