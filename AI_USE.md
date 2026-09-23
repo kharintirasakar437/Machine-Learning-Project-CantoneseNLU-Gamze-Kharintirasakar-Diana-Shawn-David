@@ -22,3 +22,11 @@ research data, not assistance.
 ## Section 2 — Generative models as an object of study
 
 None yet. A small pilot evaluation of one generative LLM on one task is currently a stretch goal for M4. If completed, the model, prompt, settings, date, task, and dataset split will be recorded here.
+| # | Date | Member | Tool / model | What it was used for | How the output was checked |
+|---|---|---|---|---|---|
+
+## Section 2 — Generative models as an object of study
+
+Nothing yet. The pilot evaluation (one model, one task) is a stretch goal for M4; if it runs, record
+the model name and version, the exact prompt, the decoding settings, the date, and the task and
+split used.
