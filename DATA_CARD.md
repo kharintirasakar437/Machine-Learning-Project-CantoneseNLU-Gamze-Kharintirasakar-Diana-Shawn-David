@@ -1,6 +1,12 @@
 # Data Card
 
-> Status: Draft for Milestone 2. Dataset sources, licensing details, and preprocessing decisions are still being verified.
+> Status: Draft for Milestone 2. Dataset sources and licensing have been identified. Exploratory analysis and final preprocessing decisions are still in progress.
+
+## Shared Licensing and Attribution
+
+The CantoNLU project lead confirmed by email that the project code and datasets are available under the Creative Commons Attribution 4.0 International (CC BY 4.0) license. Our group has permission to use the data and code for this project provided that appropriate attribution is given to the CantoNLU authors.
+
+The original CantoNLU repository and related paper will be cited in the final project documentation.
 
 # 1. Sentiment Analysis Dataset
 
@@ -18,9 +24,7 @@ Relevant directory:
 
     data/sentiment/
 
-The dataset is based on OpenRice restaurant reviews.
-
-Exact upstream attribution and licensing information will be confirmed during Milestone 2.
+The sentiment dataset is based on OpenRice restaurant reviews and is distributed as part of the CantoNLU project.
 
 ## Unit of Analysis
 
@@ -53,7 +57,7 @@ Fields include:
 
 Each split is balanced across the three labels.
 
-The project will preserve the original label names unless the upstream documentation provides explicit semantic definitions.
+The project will preserve the original smile, ok, and cry labels used by CantoNLU.
 
 ## Initial Data Quality Findings
 
@@ -132,9 +136,7 @@ Relevant directory:
 
     data/ld/
 
-Repository inspection indicates that the task was generated using Cantonese-Mandarin parallel sentence data.
-
-Exact upstream attribution and licensing information will be confirmed during Milestone 2.
+Repository inspection indicates that the language-detection dataset was generated from Cantonese-Mandarin parallel sentence data and then processed into Cantonese, Mandarin, and code-mixed examples.
 
 ## Unit of Analysis
 
@@ -236,11 +238,9 @@ For both tasks:
 
 The team still needs to confirm:
 
-- exact upstream dataset sources
-- exact licensing and attribution
 - final language-detection task definition
 - final language-detection cleaning policy
 - exploratory data analysis results
-- final train/validation/test strategy
-- primary metric
+- verification of train/validation/test handling
+- confirmation of macro-F1 as the final primary metric
 - compute feasibility
