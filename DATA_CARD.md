@@ -59,13 +59,17 @@ Each split is balanced across the three labels.
 
 The project will preserve the original smile, ok, and cry labels used by CantoNLU.
 
-## Initial Data Quality Findings
+## Verified Data Quality Findings
 
-Initial repository inspection found:
+Exploratory data analysis confirmed:
 
-- no duplicate examples within the sentiment splits
-- no overlap between train, validation, and test
-- balanced class distributions
+- no missing values in the training, validation, or test splits
+- no duplicate rows within any split
+- no duplicate review texts within any split
+- no review-text overlap between train, validation, and test
+- perfectly balanced class distributions across `smile`, `ok`, and `cry`
+- similar average and median review lengths across all three splits
+- a small number of long review outliers, including a maximum training length of 4,720 characters
 
 These findings will be independently verified during exploratory data analysis.
 
@@ -105,7 +109,7 @@ Possible limitations include:
 - restaurant-review domain only
 - informal Cantonese
 - code-switching
-- emojis and other non-standard text
+- emojis and other non-standard text- substantial variation in review length
 - limited generalization to other Cantonese domains
 
 ---
