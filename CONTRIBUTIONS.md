@@ -53,7 +53,9 @@ agreed edits from the contract revision notes to the contract.
 
 | Date | Member | Contribution | Evidence | Reviewed by |
 |---|---|---|---|---|
-| 2026-09-23 | Gamze Esen-Erdemir | Resolved merge conflicts and removed duplicated sections after PR #4 (`README.md`, `AI_USE.md`, `CONTRIBUTIONS.md`, `requirements.txt`) | Branch `fix-duplicate-docs` | *pending* |
+| 2026-09-23 | Gamze Esen-Erdemir | Resolved merge conflicts and removed duplicated sections after PR #4 (`README.md`, `AI_USE.md`, `CONTRIBUTIONS.md`, `requirements.txt`) | Branch `fix-duplicate-docs` | *Gamze Esen-Erdemir* |
+| 2026-09-30 | Gamze Esen-Erdemir | Language-detection EDA: class balance, `source_id` group structure, duplicates and conflicting labels, overlap between splits, sentence length, missing values; summary of findings and open questions for the 2-class vs. 3-class decision | `notebooks/language_detection_eda.ipynb`, `DATA_CARD.md` branch `m2-ld-eda` | *pending* |
+
 
 ## M3 — Baseline reproduction (due Oct 19, 2026)
 
