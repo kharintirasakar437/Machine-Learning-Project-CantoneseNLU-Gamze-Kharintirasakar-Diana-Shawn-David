@@ -144,6 +144,8 @@ The original project proposal described the task as Cantonese vs. Mandarin.
 
 The team will decide during Milestone 2 whether to keep all three classes or restrict the task to Cantonese and Mandarin.
 
+Decision (Sept 30, 2026): all three classes are kept, because the CantoNLU paper defines language detection as "a three-label classification task that identifies whether a given sentence is written in Cantonese, Mandarin, or mixed", and keeping the same task makes our results comparable with the published ones. A two-class version may be run as an ablation.
+
 ## Source
 
 CantoNLU repository:
@@ -320,3 +322,33 @@ The team still needs to confirm:
 - compute feasibility
 
 Update (Sept 30, 2026): the language-detection EDA is complete; see `notebooks/language_detection_eda.ipynb` and the "EDA Verification of the Findings" section above.
+
+---
+
+# 5. Risks and Mitigations
+
+Risks identified from the EDA, the CantoNLU paper, and project planning (Sept 30, 2026).
+
+## Data risks
+
+| Risk | Effect | Mitigation |
+|---|---|---|
+| Label conflicts in language detection (161 train, 18 validation, 12 test sentences appear with two labels, all involving label 2) | No model can score perfectly; the ceiling is slightly below 100% | Use the released data unchanged so results stay comparable with the paper; report the number of conflicts as a limitation. Any cleaned variant is analysed on the validation split only. |
+| Identical sentences across splits (7 train/validation, 8 train/test) | Very small leakage that could slightly inflate scores | Reported as a limitation; test sentences are counted but never inspected. |
+| The code-mixed class is synthetic (random token replacement), and Mandarin text was converted automatically with HanziConv, which leaves some conversion errors | Models may partly learn generation or conversion artefacts instead of language differences | Check for this in the error analysis; a two-class (Cantonese vs. Mandarin) ablation shows how much the synthetic class affects results. |
+| The released language-detection data does not match the paper's counts (paper: 47,578 sentences, 27,578 mixed; released: 47,519, 32,033 mixed), and the paper does not state which F1 average it reports | Our numbers may not be directly comparable with the published scores | Report macro-, micro- and weighted-F1 side by side and present the comparison as indicative rather than exact. |
+| Class imbalance in language detection (about two thirds label 2) | Accuracy alone would overstate performance | Macro-F1 as the primary metric, with per-class precision, recall and confusion matrices. |
+| Sentiment labels appear to come from reviewers' own ratings, and some do not match the text | Label noise lowers the achievable score and makes some errors ambiguous | Discuss in the error analysis; flag examples where the label itself looks questionable. |
+| A few sentiment reviews contain URLs, restaurant phone numbers or social-media handles | Low privacy risk | The data is not redistributed; such reviews are not shown as examples in reports. |
+| Narrow domains (restaurant reviews; Wikipedia-style sentences) | Results may not generalise to other Cantonese text | Stated as a limitation of scope. |
+| Error analysis requires reading Cantonese | Misinterpreted examples could lead to wrong conclusions | Use PyCantonese and translation as aids and mark uncertain cases explicitly instead of guessing. |
+
+## Project risks
+
+| Risk | Effect | Mitigation |
+|---|---|---|
+| Test-set leakage through repeated evaluation | Overly optimistic results | Tuning on validation only; the test split is used once for the final report (`--final`); fixed seed 3052. |
+| Compute for LaBSE embeddings on laptops without a GPU | Slow experiments | Embeddings are computed once (inference only) and cached; see the feasibility and compute plan. |
+| Limited team availability and tight milestone deadlines | Late or incomplete milestones | Internal deadlines 48 hours before each milestone; if time runs short, optional models (gradient boosting, pilot LLM evaluation) are dropped first, while the committed models are kept. |
+| Parallel edits to the same files | Merge conflicts, as happened after PR #4 | One branch per task, branches created from an up-to-date `main`, and every change reviewed through a pull request. |
+| AI-assisted code or text that is not verified | Errors or claims the team cannot defend | All AI assistance is logged in `AI_USE.md`, and generated code and numbers are checked against the actual outputs before use. |

@@ -60,7 +60,7 @@ Initial inspection found no duplicate examples within the sentiment splits and n
 
 The data comes from OpenRice restaurant reviews through the CantoNLU project.
 
-Exact source attribution and licensing information will be confirmed and documented during Milestone 2.
+The CantoNLU data is released under CC BY 4.0, as confirmed by the CantoNLU authors; see `DATA_CARD.md` and the "License and Attribution" section of the main README.
 
 ---
 
@@ -86,10 +86,7 @@ Current labels:
 - `1` = Mandarin
 - `2` = code-mixed / corrupted sentence
 
-Our original proposal described this task as Cantonese vs. Mandarin. During Milestone 2, the team will decide whether to:
-
-1. keep all three classes, or
-2. use only Cantonese and Mandarin.
+We keep all three classes, as in the CantoNLU paper, so that our results are comparable with the published ones.
 
 Initial inspection found some data-quality issues in the language-detection dataset, including:
 
@@ -116,7 +113,12 @@ The final project should document:
 - label definitions
 - preprocessing decisions
 - known limitations
-Copy the official splits here from the benchmark repo (not redistributed here for license hygiene):
 
-    git clone https://github.com/Aatlantise/canto-nlu.git
-    cp canto-nlu/openrice-senti/*.tsv data/
+## Copying the Data
+
+Run from the root of this repository (the upstream repository is cloned next to it):
+
+    git clone https://github.com/Aatlantise/canto-nlu.git ../canto-nlu
+    mkdir -p data/sentiment data/ld
+    cp ../canto-nlu/data/sentiment/{train,valid,test}.jsonl data/sentiment/
+    cp ../canto-nlu/data/ld/ld_{train,val,test}.jsonl data/ld/

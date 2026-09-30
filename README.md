@@ -129,10 +129,7 @@ Current split sizes:
 | Validation | 2,425 |
 | Test | 2,341 |
 
-Our original proposal described this task as Cantonese vs. Mandarin. During Milestone 2, the team will decide whether to:
-
-1. keep all three classes, or
-2. restrict the task to Cantonese and Mandarin only.
+We keep all three classes, as in the CantoNLU paper, so that our results are comparable with the published ones. A two-class version (Cantonese vs. Mandarin) may be run as an ablation.
 
 Initial inspection identified possible data-quality issues, including:
 
@@ -192,9 +189,9 @@ pip install -r requirements.txt
 
 ## Getting the Data
 
-The raw data is not redistributed in this repository. The upstream repository ships no LICENSE
-file, so we keep the data local, request written course-use permission from the authors, and record
-the outcome in the data card.
+The raw data is not redistributed in this repository. The CantoNLU authors confirmed by email that
+the data and code are released under CC BY 4.0 (see "License and Attribution" below); we still keep
+the data local so that everyone downloads the same version from the source.
 
 Clone the upstream CantoNLU repository separately:
 
@@ -220,7 +217,7 @@ data/
 
 The raw data files are excluded from Git using `.gitignore`.
 
-Exact source attribution and licensing details are being verified as part of Milestone 2 and will be recorded in `DATA_CARD.md`.
+Source, license, and dataset details are recorded in `DATA_CARD.md`.
 
 ## Running the Baselines
 
@@ -301,6 +298,15 @@ Human-performance measurement is outside the scope of this CSCI 3052U course pro
 the Lee Language Lab's parallel annotation effort.
 
 A small pilot evaluation of one generative LLM on one task remains a stretch goal and does not affect the project's core success criteria.
+
+## License and Attribution
+
+- **Our code and documentation** are released under the MIT License (see [`LICENSE`](LICENSE)).
+- **Data and upstream code:** this project uses datasets and code from
+  [CantoNLU](https://github.com/Aatlantise/canto-nlu) by Min, Ng, Chan, Zhao, and Lee (2025),
+  released under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). The CantoNLU authors
+  confirmed this license and permission for our use by email; they ask that derivative work be
+  attributed to them. The data is not included in this repository.
 
 ## References
 

@@ -1,6 +1,6 @@
 # --- Benchmark data: keep local, do not commit -------------------------------
-# The CantoNLU repository ships no LICENSE file, so we keep its data local and
-# document source/licensing details in the data card and data/README.md.
+# The CantoNLU data is CC BY 4.0 (confirmed by the authors); we keep it local so that
+# everyone downloads the same version from the source. See data/README.md.
 data/*
 !data/README.md
 !data/.gitkeep

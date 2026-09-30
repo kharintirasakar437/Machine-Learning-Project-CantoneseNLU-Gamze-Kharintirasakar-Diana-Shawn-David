@@ -55,6 +55,7 @@ agreed edits from the contract revision notes to the contract.
 |---|---|---|---|---|
 | 2026-09-23 | Gamze Esen-Erdemir | Resolved merge conflicts and removed duplicated sections after PR #4 (`README.md`, `AI_USE.md`, `CONTRIBUTIONS.md`, `requirements.txt`) | Branch `fix-duplicate-docs` | *Gamze Esen-Erdemir* |
 | 2026-09-30 | Gamze Esen-Erdemir | Language-detection EDA: class balance, `source_id` group structure, duplicates and conflicting labels, overlap between splits, sentence length, missing values; summary of findings and open questions for the 2-class vs. 3-class decision | `notebooks/language_detection_eda.ipynb`, `DATA_CARD.md` branch `m2-ld-eda` | *pending* |
+| 2026-09-30 | Gamze Esen-Erdemir | M2 documentation: three-class task decision based on the CantoNLU paper; `DATA_CARD.md` additions (EDA verification, sample inputs/outputs, privacy check, risks and mitigations); `LICENSE` and license/attribution fixes in `README.md` and `data/README.md`; updated proposal; approval-memo skeleton; task plan for the rest of M2 | `DATA_CARD.md`, `LICENSE`, `README.md`, `data/README.md`, branch `m2-ld-eda`; updated proposal and memo (shared as files) | *pending* |
 
 
 ## M3 — Baseline reproduction (due Oct 19, 2026)
