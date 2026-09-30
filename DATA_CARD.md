@@ -112,6 +112,20 @@ Possible limitations include:
 - emojis and other non-standard text- substantial variation in review length
 - limited generalization to other Cantonese domains
 
+## Sample Inputs and Outputs
+
+The model input is the review text (`sentence`); the output is one of the three labels. Examples from the training split (English translations are AI-assisted and have not been checked by a Cantonese speaker):
+
+| Input (`sentence`) | English translation | Output (`label`) |
+|---|---|---|
+| 環境好,食物好,正!!! 每次到石澳, 都會到儿回味吃魷魚筒焗飯, 好正! 真係唔好錯過呀!! | Good atmosphere, good food, great!!! Every time I go to Shek O I come back here for the baked squid rice, so good! Really don't miss it!! | `smile` |
+| 唔見得比其他酒家特別好食 一行7人到此酒家食晚飯, 7道海鮮 + 雞連炒飯 & 炒菜共10道菜 total: $2750 無特別好食, 水準只屬合格, 不值專程到流浮山食呢間嘢... | Not noticeably better than other restaurants. Seven of us had dinner here, 10 dishes in total for $2,750. Nothing special, only passable; not worth a special trip to Lau Fau Shan... | `ok` |
+| 侍應唔得 侍應無溝通，多過一枱客問ｏ野，就開始亂．ｏ野食一般，好逼．人多唔好去，有位坐無位食． | The waiters are poor and don't communicate; once more than one table asks for something, it becomes chaotic. The food is average and it is very crowded. Don't go when it's busy. | `cry` |
+
+Privacy check (training split, Sept 30, 2026): the reviews are publicly posted restaurant reviews, and the data has no reviewer name or ID field (`source` is always `openrice`). A small number of review texts contain URLs (14), 8-digit numbers that are mostly restaurant phone numbers (15), or `@` handles (45, mostly restaurant or hotel accounts, a few reviewers promoting their own social-media accounts). No e-mail addresses were found. We do not redistribute the data, and such reviews will not be used as examples in reports.
+
+While selecting examples we also noticed that some labels do not obviously match the text (e.g. training review `id` 94 is labelled `ok` but reads as clearly positive). The labels appear to come from the reviewers' own ratings rather than from separate annotation; this is noted as a possible source of label noise.
+
 ---
 
 # 2. Language Detection Dataset
@@ -130,6 +144,8 @@ The original project proposal described the task as Cantonese vs. Mandarin.
 
 The team will decide during Milestone 2 whether to keep all three classes or restrict the task to Cantonese and Mandarin.
 
+Decision (Sept 30, 2026): all three classes are kept, because the CantoNLU paper defines language detection as "a three-label classification task that identifies whether a given sentence is written in Cantonese, Mandarin, or mixed", and keeping the same task makes our results comparable with the published ones. A two-class version may be run as an ablation.
+
 ## Source
 
 CantoNLU repository:
@@ -141,6 +157,8 @@ Relevant directory:
     data/ld/
 
 Repository inspection indicates that the language-detection dataset was generated from Cantonese-Mandarin parallel sentence data and then processed into Cantonese, Mandarin, and code-mixed examples.
+
+The EDA (`notebooks/language_detection_eda.ipynb`) is consistent with this: rows that share a `source_id` are versions of the same original sentence, and each source sentence produced between 1 and 8 rows in the training set.
 
 ## Unit of Analysis
 
@@ -165,11 +183,29 @@ Fields include:
 | Validation | 2,425 |
 | Test | 2,341 |
 
+Class distribution (from the EDA):
+
+| Split | 0 (Cantonese) | 1 (Mandarin) | 2 (Code-mixed) |
+|---|---:|---:|---:|
+| Train | 6,924 (16.2%) | 6,971 (16.3%) | 28,858 (67.5%) |
+| Validation | 398 (16.4%) | 399 (16.5%) | 1,628 (67.1%) |
+| Test | 396 (16.9%) | 398 (17.0%) | 1,547 (66.1%) |
+
+The class proportions are consistent across splits. No `source_id` appears in more than one split, so the splits were made by source sentence (a group split): all versions of the same original sentence stay in the same split.
+
 ## Labels
 
 - `0` = Cantonese
 - `1` = Mandarin
 - `2` = code-mixed / corrupted sentence
+
+Full definitions from `canto-nlu/data/ld/README.md`:
+
+- `0`: original Cantonese sentence
+- `1`: original Mandarin sentence (converted to traditional characters)
+- `2`: corrupted, partially code-mixed sentence
+
+These definitions come from the upstream README and have not yet been checked against the upstream generation code.
 
 ## Initial Data Quality Findings
 
@@ -183,6 +219,26 @@ Initial repository inspection identified several possible issues:
 
 These findings will be independently verified before any cleaning decisions are made.
 
+## EDA Verification of the Findings
+
+Verified in `notebooks/language_detection_eda.ipynb` (Sept 30, 2026). Test sentences were only counted, not inspected.
+
+| Initial finding | Result |
+|---|---|
+| Identical sentences with different labels | **Confirmed.** 161 sentences in train (322 rows, about 0.75%), 18 in validation and 12 in test appear with two different labels. Every conflict involves label 2: 148 are labelled both 1 and 2, and 13 both 0 and 2. No sentence is labelled both Cantonese and Mandarin. |
+| Overlap between splits | **Confirmed, small.** No `source_id` is shared between splits, but 7 identical sentences appear in both train and validation and 8 in both train and test (0 between validation and test). The source corpus repeats some sentences, mostly Wikipedia template sentences, under different `source_id`s. The overlapping sentences have the same label in both splits. |
+| Label noise in generated code-mixed examples | **Partly supported.** The label conflicts above suggest that the corruption step sometimes left a sentence unchanged while still labelling it as code-mixed. Why Mandarin sentences are affected much more often than Cantonese ones is still open. |
+| Documentation vs. generation code | **Not yet verified.** The generation code has not been read. |
+| Class imbalance with three labels | **Confirmed.** Label 2 is about two thirds of every split. |
+
+Additional findings from the EDA:
+
+- Versions of the same source sentence are very similar at the character level (Cantonese vs. Mandarin similarity 0.88 in the inspected group), so the task depends on small character-level differences.
+- 268 extra copies of sentences exist within train (23 in validation, 14 in test); 161 of the train copies come from the label conflicts above.
+- Some text contains likely errors from automatic simplified-to-traditional conversion (e.g. `賣瞭`, `代錶隊` instead of `賣了`, `代表隊`). This is a hypothesis to check against the upstream conversion code.
+- Some rows are sentence fragments (e.g. starting with a comma), and 4 rows (about 714 characters, all from `source_id` 8038) look like a whole paragraph rather than a sentence.
+- No missing values or empty sentences were found in any split.
+
 ## Planned Treatment
 
 Before model training, the team will:
@@ -193,6 +249,8 @@ Before model training, the team will:
 4. identify conflicting labels
 5. decide between a 2-class and 3-class version of the task
 6. document all cleaning decisions
+
+Status (Sept 30, 2026): steps 1–4 are done in `notebooks/language_detection_eda.ipynb`. Steps 5 and 6 are still open. Note for step 5: every label conflict involves label 2, so a 2-class version (labels 0 and 1) would be almost exactly balanced and free of these conflicts, but would drop about two thirds of the data.
 
 The original dataset files will remain unchanged.
 
@@ -224,6 +282,20 @@ Possible limitations include:
 - preprocessing artefacts
 - possible shortcut features that make Cantonese and Mandarin easier to distinguish
 
+Sentence length was checked as a possible shortcut: median length is 32 characters for Cantonese and Mandarin and 35 for code-mixed sentences, and the distributions overlap heavily, so length alone is a weak signal.
+
+## Sample Inputs and Outputs
+
+The model input is a single sentence (`sentence`); the output is one of the three labels. The examples below are versions of the same source sentence (training split, `source_id` 0), which shows how small the differences between the classes are. English translation (AI-assisted, not checked by a Cantonese speaker): "Kin Sang Estate is a housing estate under the Tenants Purchase Scheme; in the same building some flats have already been sold, and the rest are rental flats."
+
+| Input (`sentence`) | Output (`label`) |
+|---|---|
+| 建生邨屬於租者置其屋計劃**嘅**屋邨，同一大廈內，有**啲**單位已經賣**咗**，其餘**嘅係**租住單位。 | `0` (Cantonese) |
+| 建生邨屬於租者置其屋計劃**的**屋邨，同一大廈內，有**些**單位已經賣**瞭**，其餘**的是**租住單位。 | `1` (Mandarin) |
+| 建生邨屬於租者置其屋計劃**的**屋邨，同一大廈內，有**些**單位已經賣**咗**，其餘**嘅係**租住單位。 | `2` (code-mixed) |
+
+The bold characters are the only differences: Cantonese 嘅 / 啲 / 咗 / 係 versus Mandarin 的 / 些 / 了 / 是. The Mandarin sentence shows `賣瞭` instead of `賣了`, which is likely an error from the automatic conversion to traditional characters (the CantoNLU paper states that HanziConv was used).
+
 ---
 
 # 3. Train / Validation / Test Policy
@@ -248,3 +320,35 @@ The team still needs to confirm:
 - verification of train/validation/test handling
 - confirmation of macro-F1 as the final primary metric
 - compute feasibility
+
+Update (Sept 30, 2026): the language-detection EDA is complete; see `notebooks/language_detection_eda.ipynb` and the "EDA Verification of the Findings" section above.
+
+---
+
+# 5. Risks and Mitigations
+
+Risks identified from the EDA, the CantoNLU paper, and project planning (Sept 30, 2026).
+
+## Data risks
+
+| Risk | Effect | Mitigation |
+|---|---|---|
+| Label conflicts in language detection (161 train, 18 validation, 12 test sentences appear with two labels, all involving label 2) | No model can score perfectly; the ceiling is slightly below 100% | Use the released data unchanged so results stay comparable with the paper; report the number of conflicts as a limitation. Any cleaned variant is analysed on the validation split only. |
+| Identical sentences across splits (7 train/validation, 8 train/test) | Very small leakage that could slightly inflate scores | Reported as a limitation; test sentences are counted but never inspected. |
+| The code-mixed class is synthetic (random token replacement), and Mandarin text was converted automatically with HanziConv, which leaves some conversion errors | Models may partly learn generation or conversion artefacts instead of language differences | Check for this in the error analysis; a two-class (Cantonese vs. Mandarin) ablation shows how much the synthetic class affects results. |
+| The released language-detection data does not match the paper's counts (paper: 47,578 sentences, 27,578 mixed; released: 47,519, 32,033 mixed), and the paper does not state which F1 average it reports | Our numbers may not be directly comparable with the published scores | Report macro-, micro- and weighted-F1 side by side and present the comparison as indicative rather than exact. |
+| Class imbalance in language detection (about two thirds label 2) | Accuracy alone would overstate performance | Macro-F1 as the primary metric, with per-class precision, recall and confusion matrices. |
+| Sentiment labels appear to come from reviewers' own ratings, and some do not match the text | Label noise lowers the achievable score and makes some errors ambiguous | Discuss in the error analysis; flag examples where the label itself looks questionable. |
+| A few sentiment reviews contain URLs, restaurant phone numbers or social-media handles | Low privacy risk | The data is not redistributed; such reviews are not shown as examples in reports. |
+| Narrow domains (restaurant reviews; Wikipedia-style sentences) | Results may not generalise to other Cantonese text | Stated as a limitation of scope. |
+| Error analysis requires reading Cantonese | Misinterpreted examples could lead to wrong conclusions | Use PyCantonese and translation as aids and mark uncertain cases explicitly instead of guessing. |
+
+## Project risks
+
+| Risk | Effect | Mitigation |
+|---|---|---|
+| Test-set leakage through repeated evaluation | Overly optimistic results | Tuning on validation only; the test split is used once for the final report (`--final`); fixed seed 3052. |
+| Compute for LaBSE embeddings on laptops without a GPU | Slow experiments | Embeddings are computed once (inference only) and cached; see the feasibility and compute plan. |
+| Limited team availability and tight milestone deadlines | Late or incomplete milestones | Internal deadlines 48 hours before each milestone; if time runs short, optional models (gradient boosting, pilot LLM evaluation) are dropped first, while the committed models are kept. |
+| Parallel edits to the same files | Merge conflicts, as happened after PR #4 | One branch per task, branches created from an up-to-date `main`, and every change reviewed through a pull request. |
+| AI-assisted code or text that is not verified | Errors or claims the team cannot defend | All AI assistance is logged in `AI_USE.md`, and generated code and numbers are checked against the actual outputs before use. |
