@@ -58,6 +58,15 @@ agreed edits from the contract revision notes to the contract.
 | 2026-09-30 | Gamze Esen-Erdemir | M2 documentation: three-class task decision based on the CantoNLU paper; `DATA_CARD.md` additions (EDA verification, sample inputs/outputs, privacy check, risks and mitigations); `LICENSE` and license/attribution fixes in `README.md` and `data/README.md`; updated proposal; approval-memo skeleton; task plan for the rest of M2 | `DATA_CARD.md`, `LICENSE`, `README.md`, `data/README.md`, branch `m2-ld-eda`; updated proposal and memo (shared as files) | *pending* |
 
 | 2026-10-01 | Shawn Xiao | Benchmarked TF-IDF with Naive Bayes and logistic regression, measured LaBSE CPU embedding time, estimated full-dataset runtime and cache size, completed approval memo Section 8, and pinned package versions. | Branch `m2-compute-plan`; approval memo Section 8 | *pending* |
+| 2026-09-28 | David Zajac | Sentiment-analysis EDA: verified split sizes, class balance, missing values, duplicate rows/texts, split overlap, review-length distribution, long-review outliers, and sample examples; updated sentiment findings in the data card | `notebooks/sentiment_eda.ipynb`, `DATA_CARD.md`, sentiment EDA PR | Gamze Esen-Erdemir |
+| 2026-09-30 | Gamze Esen-Erdemir | Language-detection EDA: class balance, `source_id` group structure, duplicates and conflicting labels, overlap between splits, sentence length, missing values; summary of findings and open questions for the 2-class vs. 3-class decision | `notebooks/language_detection_eda.ipynb`, `DATA_CARD.md` branch `m2-ld-eda` | *complete* |
+| 2026-09-30 | Gamze Esen-Erdemir | M2 documentation: three-class task decision based on the CantoNLU paper; `DATA_CARD.md` additions (EDA verification, sample inputs/outputs, privacy check, risks and mitigations); `LICENSE` and license/attribution fixes in `README.md` and `data/README.md`; updated proposal; approval-memo skeleton; task plan for the rest of M2 | `DATA_CARD.md`, `LICENSE`, `README.md`, `data/README.md`, branch `m2-ld-eda`; updated proposal and memo (shared as files) | *complete* |
+| 2026-10-01 | Diana Riyahi| Section 6 (data splits and evaluation protocol) official splits, group split by `source_id`, validation-only tuning, single test run, seeds and learning curve| Approval memo, Section 6 (shared as a file) | *complete* |
+| 2026-10-01 | |Kharintirasakar Uthayanan and Diana Riyahi|Worked on section 7 (primary metric): Macro-F1, the unwieghted average of the per-class F1 scroes, writing a justification as to why it was the best metric as well as secondary measures such as report accuracy and more.|
+| Approval memo, section 7| |*complete*| 
+| 2026-10-01 | Kharintirasakar|  Approved pull request reviewing the branch, reading through and editing the approval memo. I also revised the proposal adding changes since milestone along with Gamze. Also created a folder reports to hold the proposal and approval memo. |Aproval memo, Proposal | *complete* |
+
+Proposal and Memo Approval
 
 ## M3 — Baseline reproduction (due Oct 19, 2026)
 
