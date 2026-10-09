@@ -148,20 +148,25 @@ These issues will be independently verified before any cleaning decisions are ma
 │   ├── README.md
 │   ├── sentiment/              # local only, ignored by Git
 │   └── ld/                     # local only, ignored by Git
-├── notebooks/                  # exploratory analysis and later experiments
-├── src/                        # training and evaluation scripts
-├── results/                    # generated tables and figures
+├── notebooks/                  # exploratory data analysis (one notebook per task)
+├── src/
+│   ├── data.py                 # loads and checks the official splits
+│   └── train_baselines.py      # naive and TF-IDF baselines, writes results/
+├── scripts/                    # one-off compute checks for the feasibility plan (run from the repo root)
+├── results/                    # generated result tables (tracked on purpose)
+├── report/                     # milestone submissions (PDF)
 ├── AI_USE.md                   # AI assistance log
 ├── CONTRIBUTIONS.md            # team contribution record
 ├── DATA_CARD.md                # dataset documentation
-├── requirements.txt            # Python dependencies
+├── LICENSE                     # MIT license for our code
+├── requirements.txt            # pinned Python dependencies
 ├── .gitignore
 └── README.md
 ```
 
 ## Setup
 
-Python 3.11+ (developed on 3.13).
+Tested with Python 3.13.14; package versions are pinned in `requirements.txt`.
 
 Create a Python virtual environment:
 
@@ -221,47 +226,49 @@ Source, license, and dataset details are recorded in `DATA_CARD.md`.
 
 ## Running the Baselines
 
-The baseline training interface will be added during Milestone 3 (internal deadline Oct 13).
-
-Planned usage:
+From the repository root, after copying the data (see `data/README.md`):
 
 ```bash
-# Train and evaluate naive and classical baselines on the validation split
-python src/train_baselines.py
+python src/data.py              # optional: checks that the data files load correctly
+python src/train_baselines.py   # trains all baselines, evaluates on the validation split
 ```
 
-Final evaluation will use the locked test split only after model selection is complete. Run this
-**once**, for the report:
+This writes `results/baseline_valid.csv`. All randomness uses seed 3052 (three seeds, 3052–3054,
+for the stratified benchmark), so re-running the script reproduces the committed table exactly.
+
+Final evaluation on the locked test split happens **once**, after model selection is complete:
 
 ```bash
-python src/train_baselines.py --final
+python src/train_baselines.py --final   # prints a warning; writes results/baseline_test.csv
 ```
-
-`--final` will print a warning by design: it touches the locked test split. The exact command
-structure may change as the implementation is developed.
 
 ## Results
 
-Baseline results will be added during Milestone 3 together with the scripts required to reproduce them.
+Baselines on the **validation** split (Milestone 3), from `results/baseline_valid.csv`.
+Default hyperparameters; character 1–3-gram TF-IDF.
+
+| Task | Model | Accuracy | Macro-F1 | Micro-F1 | Weighted-F1 |
+|---|---|---:|---:|---:|---:|
+| Sentiment | Majority class | 0.333 | 0.167 | 0.333 | 0.167 |
+| Sentiment | Stratified random (3 seeds) | 0.323–0.334 | 0.323–0.334 | 0.323–0.334 | 0.323–0.334 |
+| Sentiment | TF-IDF + Naive Bayes | 0.698 | 0.686 | 0.698 | 0.686 |
+| Sentiment | TF-IDF + Logistic Regression | 0.751 | 0.751 | 0.751 | 0.751 |
+| Language detection | Majority class | 0.671 | 0.268 | 0.671 | 0.539 |
+| Language detection | Stratified random (3 seeds) | 0.503–0.523 | 0.320–0.345 | 0.503–0.523 | 0.499–0.518 |
+| Language detection | TF-IDF + Naive Bayes | 0.671 | 0.268 | 0.671 | 0.539 |
+| Language detection | TF-IDF + Logistic Regression | 0.756 | 0.599 | 0.756 | 0.721 |
+
+Naive Bayes predicts the code-mixed class for every language-detection sentence, so it does not
+beat the majority benchmark; this is analysed in the Milestone 3 memo. Published CantoNLU scores
+are test-set results of pretrained models and are not directly comparable with these validation
+results.
 
 No result should be treated as final unless it can be regenerated from code in this repository.
 
 ## Current Status
 
-Milestone 1 has been completed and submitted.
-
-Current work is focused on **Milestone 2: Dataset and Problem Approval**.
-
-Current tasks include:
-
-- verifying dataset sources and licenses
-- examining dataset structure and quality
-- performing initial exploratory data analysis
-- confirming the final language-detection task definition
-- documenting train/validation/test splits
-- confirming the evaluation plan
-- documenting known dataset limitations
-- confirming compute feasibility
+Milestones 1 and 2 are complete. Current work is focused on **Milestone 3: Baseline Reproduction**
+(data pipeline, naive and course-level baselines, baseline table, discrepancy analysis).
 
 ## Milestones
 

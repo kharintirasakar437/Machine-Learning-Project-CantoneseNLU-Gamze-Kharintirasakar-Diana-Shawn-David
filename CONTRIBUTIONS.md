@@ -70,7 +70,7 @@ Proposal and Memo Approval
 
 | Date | Member | Contribution | Evidence | Reviewed by |
 |---|---|---|---|---|
-| | | | | |
+| 2026-10-09 | Gamze Esen-Erdemir | Data pipeline (`src/data.py`: loading and checking the official splits); naive benchmarks and TF-IDF + Naive Bayes / logistic regression baselines with a shared evaluation function and the `--final` test-split flag (`src/train_baselines.py`); validation results table; Naive Bayes diagnostic; README run and results sections; draft of the technical memo | `src/data.py`, `src/train_baselines.py`, `results/baseline_valid.csv`, `scripts/nb_ld_check.py`, `README.md`, branch `m3-baseline-pipeline` | *pending* |
 
 ## M4 — Progress presentation (due Oct 30, 2026)
 
