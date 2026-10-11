@@ -198,29 +198,28 @@ The raw data is not redistributed in this repository. The CantoNLU authors confi
 the data and code are released under CC BY 4.0 (see "License and Attribution" below); we still keep
 the data local so that everyone downloads the same version from the source.
 
-Clone the upstream CantoNLU repository separately:
+Follow [`data/README.md`](data/README.md) for the exact steps to clone the upstream CantoNLU repository and copy the required dataset files.
 
-```bash
-git clone https://github.com/Aatlantise/canto-nlu.git
-```
+The upstream repository should be cloned into a folder named canto-nlu inside this project root.
 
-The relevant files can then be copied locally into this project's `data/` directory.
-
-Expected local structure:
+After copying the data, the expected local structure is:
 
 ```text
-data/
-├── sentiment/
-│   ├── train.jsonl
-│   ├── valid.jsonl
-│   └── test.jsonl
-└── ld/
-    ├── ld_train.jsonl
-    ├── ld_val.jsonl
-    └── ld_test.jsonl
+.
+├── canto-nlu/                  # upstream CantoNLU clone; local only
+├── data/
+│   ├── sentiment/
+│   │   ├── train.jsonl
+│   │   ├── valid.jsonl
+│   │   └── test.jsonl
+│   └── ld/
+│       ├── ld_train.jsonl
+│       ├── ld_val.jsonl
+│       └── ld_test.jsonl
+└── ...
 ```
 
-The raw data files are excluded from Git using `.gitignore`.
+The raw data files and upstream canto-nlu clone are excluded from Git using `.gitignore`.
 
 Source, license, and dataset details are recorded in `DATA_CARD.md`.
 
@@ -233,8 +232,11 @@ python src/data.py              # optional: checks that the data files load corr
 python src/train_baselines.py   # trains all baselines, evaluates on the validation split
 ```
 
-This writes `results/baseline_valid.csv`. All randomness uses seed 3052 (three seeds, 3052–3054,
-for the stratified benchmark), so re-running the script reproduces the committed table exactly.
+This writes `results/baseline_valid.csv`. All randomness uses seed 3052 (three seeds, 3052–3054
+for the stratified benchmark).
+
+The committed table was generated in the tested Python 3.13.14 environment. Other Python versions
+may produce very small numerical differences.
 
 Final evaluation on the locked test split happens **once**, after model selection is complete:
 
