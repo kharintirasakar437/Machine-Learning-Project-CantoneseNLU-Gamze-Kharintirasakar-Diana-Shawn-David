@@ -70,7 +70,8 @@ Proposal and Memo Approval
 
 | Date | Member | Contribution | Evidence | Reviewed by |
 |---|---|---|---|---|
-| 2026-10-09 | Gamze Esen-Erdemir | Data pipeline (`src/data.py`: loading and checking the official splits); naive benchmarks and TF-IDF + Naive Bayes / logistic regression baselines with a shared evaluation function and the `--final` test-split flag (`src/train_baselines.py`); validation results table; Naive Bayes diagnostic; README run and results sections; draft of the technical memo | `src/data.py`, `src/train_baselines.py`, `results/baseline_valid.csv`, `scripts/nb_ld_check.py`, `README.md`, branch `m3-baseline-pipeline` | *pending* |
+| 2026-10-09 | Gamze Esen-Erdemir | Data pipeline (`src/data.py`: loading and checking the official splits); naive benchmarks and TF-IDF + Naive Bayes / logistic regression baselines with a shared evaluation function and the `--final` test-split flag (`src/train_baselines.py`); validation results table; Naive Bayes diagnostic; README run and results sections; draft of the technical memo | `src/data.py`, `src/train_baselines.py`, `results/baseline_valid.csv`, `scripts/nb_ld_check.py`, `README.md`, branch `m3-baseline-pipeline` | Diana Riyahi |
+| 2026-10-11 | Diana Riyahi | Reproduction check and code review of the M3 baseline pipeline on Windows 11, Python 3.11.9, scikit-learn 1.7.2: data shapes and `nb_ld_check.py` output match exactly; `results/baseline_valid.csv` differs only in LD TF-IDF + LR weighted-F1 (0.722 vs 0.721, unrounded 0.72161, a rounding-boundary difference); reported it in a review comment and approved the PR | PR #20 review and comment on `results/baseline_valid.csv` | *pending* |
 
 ## M4 — Progress presentation (due Oct 30, 2026)
 
