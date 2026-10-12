@@ -27,7 +27,9 @@ def load_split(task, split):
 
     # Basic checks: a wrong or corrupted file should fail loudly, not silently
     assert {"sentence", "label"} <= set(df.columns), f"missing columns in {path}"
-    assert df["sentence"].notna().all(), f"empty sentence in {path}"
+    assert df["sentence"].notna().all(), f"missing sentence in {path}"
+    assert (df["sentence"].str.strip() != "").all(), f"empty sentence in {path}"
+
     assert set(df["label"]) <= LABELS[task], f"unexpected label in {path}"
 
     return df[["sentence", "label"]]

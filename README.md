@@ -261,7 +261,15 @@ Default hyperparameters; character 1–3-gram TF-IDF.
 | Language detection | TF-IDF + Logistic Regression | 0.756 | 0.599 | 0.756 | 0.721 |
 
 Naive Bayes predicts the code-mixed class for every language-detection sentence, so it does not
-beat the majority benchmark; this is analysed in the Milestone 3 memo. Published CantoNLU scores
+beat the majority benchmark; this is analysed in the Milestone 3 memo.
+
+**Reproducibility across machines.** Team members re-ran the script on their own Windows machines
+(Python 3.10, 3.12 and 3.13). Every value matched except language-detection logistic regression,
+where some machines get macro-/weighted-F1 of 0.600 / 0.722 instead of the committed 0.599 / 0.721.
+The difference persists with the pinned package versions, so it comes from floating-point differences
+in the optimiser across environments (Python build, CPU-specific BLAS kernels). The unrounded values of
+the committed run (0.59915 and 0.72148) lie just below the rounding boundaries, so a single changed
+prediction can be enough to change the third decimal. Published CantoNLU scores
 are test-set results of pretrained models and are not directly comparable with these validation
 results.
 
