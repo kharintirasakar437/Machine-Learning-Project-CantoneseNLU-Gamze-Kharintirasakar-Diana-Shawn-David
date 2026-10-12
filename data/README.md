@@ -95,9 +95,7 @@ Initial inspection found some data-quality issues in the language-detection data
 - possible noise in the generated code-mixed examples
 - inconsistencies between some documentation and preprocessing code
 
-These issues will be investigated and documented before training.
-
----
+These issues are documented in `DATA_CARD.md` and are retained in the released splits for comparability with CantoNLU.
 
 ## Data Handling
 
@@ -116,9 +114,59 @@ The final project should document:
 
 ## Copying the Data
 
-Run from the root of this repository (the upstream repository is cloned next to it):
+Run the commands below from the root of this repository.
 
-    git clone https://github.com/Aatlantise/canto-nlu.git ../canto-nlu
-    mkdir -p data/sentiment data/ld
-    cp ../canto-nlu/data/sentiment/{train,valid,test}.jsonl data/sentiment/
-    cp ../canto-nlu/data/ld/ld_{train,val,test}.jsonl data/ld/
+The upstream CantoNLU repository should be cloned into a folder named `canto-nlu` inside this project directory.
+Choose the instructions for the shell you are using.
+
+### Git Bash, macOS, or Linux
+
+```bash
+git clone https://github.com/Aatlantise/canto-nlu.git canto-nlu
+mkdir -p data/sentiment data/ld
+cp canto-nlu/data/sentiment/{train,valid,test}.jsonl data/sentiment/
+cp canto-nlu/data/ld/ld_{train,val,test}.jsonl data/ld/
+```
+
+### Windows Command Prompt
+
+```bash
+git clone https://github.com/Aatlantise/canto-nlu.git canto-nlu
+mkdir data\sentiment
+mkdir data\ld
+
+copy canto-nlu\data\sentiment\train.jsonl data\sentiment\
+copy canto-nlu\data\sentiment\valid.jsonl data\sentiment\
+copy canto-nlu\data\sentiment\test.jsonl data\sentiment\
+
+copy canto-nlu\data\ld\ld_train.jsonl data\ld\
+copy canto-nlu\data\ld\ld_val.jsonl data\ld\
+copy canto-nlu\data\ld\ld_test.jsonl data\ld\
+```
+
+### Powershell
+
+```bash
+git clone https://github.com/Aatlantise/canto-nlu.git canto-nlu
+
+New-Item -ItemType Directory -Force data/sentiment, data/ld
+
+Copy-Item canto-nlu/data/sentiment/train.jsonl data/sentiment/
+Copy-Item canto-nlu/data/sentiment/valid.jsonl data/sentiment/
+Copy-Item canto-nlu/data/sentiment/test.jsonl data/sentiment/
+
+Copy-Item canto-nlu/data/ld/ld_train.jsonl data/ld/
+Copy-Item canto-nlu/data/ld/ld_val.jsonl data/ld/
+Copy-Item canto-nlu/data/ld/ld_test.jsonl data/ld/
+```
+
+After copying the files, verify that the datasets load correctly:
+```
+python src/data.py
+```
+
+The expected output should show:
+- sentiment train: 9,999 rows
+- sentiment validation: 999 rows
+- language detection train: 42,753 rows
+- language detection validation: 2,425 rows
