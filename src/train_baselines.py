@@ -69,5 +69,5 @@ if __name__ == "__main__":
     table = pd.DataFrame(rows)
     out = ROOT / "results" / f"baseline_{split}.csv"
     out.parent.mkdir(exist_ok=True)  # create results/ if it does not exist
-    table.to_csv(out, index=False)
+    table.to_csv(out, index=False, float_format="%.3f")
     print(f"\nSaved {out}")
