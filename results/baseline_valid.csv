@@ -1,0 +1,13 @@
+task,model,accuracy,macro_f1,micro_f1,weighted_f1
+sentiment,majority,0.333,0.167,0.333,0.167
+sentiment,stratified (seed 3052),0.334,0.334,0.334,0.334
+sentiment,stratified (seed 3053),0.325,0.325,0.325,0.325
+sentiment,stratified (seed 3054),0.323,0.323,0.323,0.323
+sentiment,tfidf + NB,0.698,0.686,0.698,0.686
+sentiment,tfidf + LR,0.751,0.751,0.751,0.751
+ld,majority,0.671,0.268,0.671,0.539
+ld,stratified (seed 3052),0.503,0.32,0.503,0.499
+ld,stratified (seed 3053),0.523,0.34,0.523,0.518
+ld,stratified (seed 3054),0.515,0.345,0.515,0.515
+ld,tfidf + NB,0.671,0.268,0.671,0.539
+ld,tfidf + LR,0.756,0.599,0.756,0.721
