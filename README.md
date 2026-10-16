@@ -200,7 +200,10 @@ the data local so that everyone downloads the same version from the source.
 
 Follow [`data/README.md`](data/README.md) for the exact steps to clone the upstream CantoNLU repository and copy the required dataset files.
 
-The upstream repository should be cloned into a folder named canto-nlu inside this project root.
+The upstream repository should be cloned into a folder named canto-nlu inside this project root and
+checked out at commit `2283874` (Sept 28, 2026), the data version used in this project. Upstream replaced
+the language-detection data on Oct 11–12, 2026, so the latest upstream version does not contain the
+`ld_*.jsonl` files; `data/README.md` has the exact commands.
 
 After copying the data, the expected local structure is:
 

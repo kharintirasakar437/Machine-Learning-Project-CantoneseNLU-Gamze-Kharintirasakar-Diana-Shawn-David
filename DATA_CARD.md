@@ -160,6 +160,15 @@ Repository inspection indicates that the language-detection dataset was generate
 
 The EDA (`notebooks/language_detection_eda.ipynb`) is consistent with this: rows that share a `source_id` are versions of the same original sentence, and each source sentence produced between 1 and 8 rows in the training set.
 
+**Data version (added Oct 16, 2026).** Everything in this data card refers to the CantoNLU repository at
+commit `2283874` (Sept 28, 2026). On Oct 11–12, 2026, upstream CantoNLU replaced this dataset with a new
+language-identification (LID) task: sentences generated from a manually constructed Cantonese/Mandarin
+grammar, 30,000 training and 6,000 test sentences (10,000 / 2,000 per class), no validation file, only
+the fields `sentence` and `label`, and a test set built from held-out grammar rules and words. Label 2
+now means "both or neither language". We keep the earlier version, which matches our EDA, our baselines
+and the data described in the CantoNLU paper; the new version may be used later as an additional
+generalisation experiment.
+
 ## Unit of Analysis
 
 One sentence per example.

@@ -119,10 +119,18 @@ Run the commands below from the root of this repository.
 The upstream CantoNLU repository should be cloned into a folder named `canto-nlu` inside this project directory.
 Choose the instructions for the shell you are using.
 
+**Data version.** This project uses the CantoNLU repository at commit `2283874` (Sept 28, 2026), so every
+command block below checks out that commit after cloning. On Oct 11–12, 2026, upstream CantoNLU replaced
+the language-detection data with a new grammar-based task (`lid_train.jsonl` / `lid_test.jsonl`, no
+validation file); with the latest upstream version, the `ld_*.jsonl` files below do not exist. The
+sentiment data is the same in both versions. If you already cloned the latest version, run
+`git -C canto-nlu checkout 2283874` and copy the files again.
+
 ### Git Bash, macOS, or Linux
 
 ```bash
 git clone https://github.com/Aatlantise/canto-nlu.git canto-nlu
+git -C canto-nlu checkout 2283874
 mkdir -p data/sentiment data/ld
 cp canto-nlu/data/sentiment/{train,valid,test}.jsonl data/sentiment/
 cp canto-nlu/data/ld/ld_{train,val,test}.jsonl data/ld/
@@ -132,6 +140,7 @@ cp canto-nlu/data/ld/ld_{train,val,test}.jsonl data/ld/
 
 ```bash
 git clone https://github.com/Aatlantise/canto-nlu.git canto-nlu
+git -C canto-nlu checkout 2283874
 mkdir data\sentiment
 mkdir data\ld
 
@@ -148,6 +157,7 @@ copy canto-nlu\data\ld\ld_test.jsonl data\ld\
 
 ```bash
 git clone https://github.com/Aatlantise/canto-nlu.git canto-nlu
+git -C canto-nlu checkout 2283874
 
 New-Item -ItemType Directory -Force data/sentiment, data/ld
 
