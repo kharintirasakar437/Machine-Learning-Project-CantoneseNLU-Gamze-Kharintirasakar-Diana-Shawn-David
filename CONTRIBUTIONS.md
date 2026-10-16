@@ -64,7 +64,6 @@ agreed edits from the contract revision notes to the contract.
 | 2026-10-01 | Kharintirasakar Uthayanan and Diana Riyahi | Worked on section 7 (primary metric): Macro-F1, the unwieghted average of the per-class F1 scroes, writing a justification as to why it was the best metric as well as secondary measures such as report accuracy and more.| Approval memo, section 7| Gamze Esen-Erdemir | 
 | 2026-10-01 | Kharintirasakar |  Approved pull request reviewing the branch, reading through and editing the approval memo. I also revised the proposal adding changes since milestone along with Gamze. Also created a folder reports to hold the proposal and approval memo. |Aproval memo, Proposal | Shawn Xiao |
 | 2026-10-01 | Shawn Xiao | Benchmarked TF-IDF with Naive Bayes and logistic regression, measured LaBSE CPU embedding time, estimated full-dataset runtime and cache size, completed approval memo Section 8, and pinned package versions. | Branch m2-compute-plan; approval memo Section 8 |Diana Riyahi| 
-Proposal and Memo Approval
 
 ## M3 — Baseline reproduction (due Oct 19, 2026)
 
