@@ -1,0 +1,13 @@
+task,model,label,valid_f1
+sentiment,tfidf + NB,cry,0.805
+sentiment,tfidf + NB,ok,0.521
+sentiment,tfidf + NB,smile,0.733
+sentiment,tfidf + LR,cry,0.824
+sentiment,tfidf + LR,ok,0.656
+sentiment,tfidf + LR,smile,0.774
+ld,tfidf + NB,0,0.000
+ld,tfidf + NB,1,0.000
+ld,tfidf + NB,2,0.803
+ld,tfidf + LR,0,0.542
+ld,tfidf + LR,1,0.415
+ld,tfidf + LR,2,0.840

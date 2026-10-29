@@ -1,0 +1,5 @@
+task,model,train_macro_f1,valid_macro_f1,fit_seconds,n_features
+sentiment,tfidf + NB,0.896,0.686,34.844,1629179
+sentiment,tfidf + LR,0.953,0.751,254.680,1629179
+ld,tfidf + NB,0.272,0.268,6.534,457479
+ld,tfidf + LR,0.623,0.599,35.500,457479
