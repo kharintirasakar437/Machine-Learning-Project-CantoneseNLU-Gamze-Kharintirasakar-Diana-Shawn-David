@@ -78,7 +78,7 @@ agreed edits from the contract revision notes to the contract.
 
 | Date | Member | Contribution | Evidence | Reviewed by |
 |---|---|---|---|---|
-| | | | | |
+| 2026-10-29 | Gamze Esen-Erdemir | Prepared the M4 slide deck and speaker notes (speaking order for all members); presented the title and introduction slides; added a validation-only script for the report's train-vs-validation scores, per-class F1 and confusion matrices; drafted the progress report following the TA's Milestone 4 template, produced with AI assistance (logged in `AI_USE.md`) | M4 slides and recording; `scripts/m4_report_extras.py`, `results/m4_train_vs_valid.csv`, `results/m4_per_class_valid.csv`, `results/m4_confusion_lr_valid.png`; progress report (submitted file) | |
 
 ## M5 — Final experimentation, analysis and fine tuning (due Nov 20, 2026)
 
