@@ -39,3 +39,13 @@ Shared settings unless an entry says otherwise:
 - **Model and settings:** TF-IDF + NB / LR, defaults as above
 - **Result:** LR train/valid macro-F1 0.953 / 0.751 (sentiment), 0.623 / 0.599 (LD); `results/m4_*.csv`, `results/m4_confusion_lr_valid.png`
 - **Observation:** sentiment overfits (large train–validation gap); LD underfits (low score even on train). Most sentiment errors involve "ok"; in LD, Cantonese and Mandarin are mostly predicted as code-mixed.
+
+### 2026-11-13 — k-NN on frozen LaBSE embeddings (Shawn Xiao)
+- **Goal:** tune k for k-NN classification on frozen LaBSE sentence embeddings (Milestone 5)
+- **Script / command:** `python scripts/knn_labse.py`
+- **Task(s):** sentiment, LD
+- **Model and settings:** LaBSE embeddings (frozen, L2-normalized, cached once per task/split under `embeddings/`), k-NN with cosine metric. No vectoriser to fit inside a Pipeline here: LaBSE is a fixed pretrained extractor, not trained on our train split, so there is no TF-IDF-style leakage risk.
+- **Search space:** k ∈ {1, 3, 5, 7, 9, 11, 15, 21, 31, 41}
+- **Selection rule:** highest validation macro-F1
+- **Result:** sentiment best k=41, macro-F1 0.644, accuracy 0.643; LD best k=1, macro-F1 0.382, accuracy 0.506; `results/tune_knn_labse.csv`, `results/tune_knn_labse.png`
+- **Observation:** on LD, accuracy keeps rising with k (up to 0.672 at k=41) while macro-F1 falls — larger k collapses predictions toward the majority class, the same effect Gamze saw with NB on LD. On sentiment, kNN-on-LaBSE (0.644) still trails TF-IDF+LR (0.751).

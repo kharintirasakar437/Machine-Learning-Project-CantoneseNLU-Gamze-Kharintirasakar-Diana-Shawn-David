@@ -84,7 +84,7 @@ agreed edits from the contract revision notes to the contract.
 
 | Date | Member | Contribution | Evidence | Reviewed by |
 |---|---|---|---|---|
-| | | | | |
+| 2026-11-13 | Shawn Xiao | k-NN on frozen LaBSE sentence embeddings for sentiment and LD: cached embeddings per task/split, tuned k on validation, logged results and observations | `scripts/knn_labse.py`, `results/tune_knn_labse.csv`, `results/tune_knn_labse.png`, `experiments/LOG.md`, branch `shawn-m5-knn-labse` | |
 
 ## M6 — Final report, repository and demonstration (due Dec 4, 2026)
 
