@@ -85,6 +85,7 @@ agreed edits from the contract revision notes to the contract.
 | Date | Member | Contribution | Evidence | Reviewed by |
 |---|---|---|---|---|
 | 2026-11-13 | Shawn Xiao | k-NN on frozen LaBSE sentence embeddings for sentiment and LD: cached embeddings per task/split, tuned k on validation, logged results and observations | `scripts/knn_labse.py`, `results/tune_knn_labse.csv`, `results/tune_knn_labse.png`, `experiments/LOG.md`, branch `shawn-m5-knn-labse` | |
+| 2026-11-17 | David Zajac | Validation-set error analysis for sentiment and language detection: generated misclassification tables and confusion-direction counts, created reproducible candidate samples for qualitative review, manually selected representative errors, grouped likely failure types, and drafted the M5 error-analysis, conclusions, and limitations sections. | `scripts/error_analysis.py`, `results/error_analysis_sentiment.csv`, `results/error_analysis_ld.csv`, `results/error_counts_sentiment.csv`, `results/error_counts_ld.csv`, `results/error_candidates_sentiment.csv`, `results/error_candidates_ld.csv`, `results/error_selected_examples.csv`, `results/m5_error_analysis_notes.md`, branch `m5-error-analysis` | |
 
 ## M6 — Final report, repository and demonstration (due Dec 4, 2026)
 

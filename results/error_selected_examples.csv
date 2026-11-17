@@ -1,0 +1,10 @@
+task,validation_row,true_label,predicted_label,error_type,reason_selected,notes
+sentiment,162,smile,ok,mixed_sentiment,"Mostly positive review with some mild criticism","Strong praise of food quality and value, but some weaker comments may pull the prediction toward neutral."
+sentiment,245,cry,ok,mixed_signal_negative,"Negative overall judgment despite some positive comments about taste","The review says the food tastes acceptable but strongly criticizes portion size and value and concludes that it is not worth the price."
+sentiment,17,cry,smile,strong_negative_misclassified_positive,"Clearly negative review predicted as positive","The title and conclusion explicitly express disappointment, making this a useful example of a substantial classification error rather than a borderline case."
+sentiment,750,smile,cry,strong_positive_misclassified_negative,"Highly enthusiastic review predicted as negative","The review repeatedly praises the food and value and uses strongly positive language and emojis, so the error cannot easily be explained by mixed sentiment."
+ld,1732,0,2,cantonese_to_code_mixed,"Pure Cantonese-style sentence predicted as code-mixed","Contains recognizable Cantonese markers such as 咗, suggesting difficulty separating pure Cantonese from the code-mixed class."
+ld,2083,1,2,mandarin_to_code_mixed,"Mandarin sentence predicted as code-mixed","The sentence is largely standard Mandarin wording, illustrating the dominant pure-language-to-code-mixed confusion."
+ld,2192,2,0,code_mixed_to_cantonese,"Mixed sentence predicted as Cantonese","Contains Cantonese-style wording such as 佢嘅 together with more Mandarin-style wording, making the mixed label plausible but subtle."
+ld,1371,2,1,code_mixed_to_mandarin,"Mixed/synthetic sentence predicted as Mandarin","Contains unusual mixed constructions such as 咁 and 係 alongside otherwise Mandarin-like wording, illustrating subtle or artificial class-2 examples."
+ld,1642,0,1,rare_cantonese_to_mandarin,"One of only two direct pure-language confusions","Included as an exception because direct Cantonese-Mandarin confusion is extremely rare compared with confusion involving class 2."
