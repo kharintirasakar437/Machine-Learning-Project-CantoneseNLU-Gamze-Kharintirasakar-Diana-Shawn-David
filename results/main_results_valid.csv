@@ -1,0 +1,11 @@
+task,model,setting,accuracy,macro_f1,micro_f1,weighted_f1
+sentiment,majority,,0.333,0.167,0.333,0.167
+sentiment,stratified (mean of 3 seeds),seeds 3052-3054,0.327,0.327,0.327,0.327
+sentiment,tfidf + NB (tuned),"alpha=0.01, ngram=(1, 3)",0.748,0.749,0.748,0.749
+sentiment,tfidf + LR (tuned),"C=30, ngram=(1, 2)",0.767,0.769,0.767,0.769
+sentiment,LaBSE + kNN,k=41,0.643,0.644,0.643,0.644
+ld,majority,,0.671,0.268,0.671,0.539
+ld,stratified (mean of 3 seeds),seeds 3052-3054,0.514,0.335,0.514,0.511
+ld,tfidf + NB (tuned),"alpha=0.003, ngram=(1, 3)",0.760,0.646,0.760,0.742
+ld,tfidf + LR (tuned),"C=30, ngram=(1, 2)",0.793,0.744,0.793,0.795
+ld,LaBSE + kNN,k=1,0.506,0.382,0.506,0.519

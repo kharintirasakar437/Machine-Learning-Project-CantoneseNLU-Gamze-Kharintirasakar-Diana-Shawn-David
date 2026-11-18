@@ -1,7 +1,7 @@
 true_label,predicted_label,count
-ok,smile,78
-cry,ok,58
-smile,ok,58
-ok,cry,36
-cry,smile,10
-smile,cry,9
+smile,ok,74
+ok,smile,60
+cry,ok,52
+ok,cry,35
+cry,smile,8
+smile,cry,4

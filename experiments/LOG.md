@@ -49,3 +49,8 @@ Shared settings unless an entry says otherwise:
 - **Selection rule:** highest validation macro-F1
 - **Result:** sentiment best k=41, macro-F1 0.644, accuracy 0.643; LD best k=1, macro-F1 0.382, accuracy 0.506; `results/tune_knn_labse.csv`, `results/tune_knn_labse.png`
 - **Observation:** on LD, accuracy keeps rising with k (up to 0.672 at k=41) while macro-F1 falls — larger k collapses predictions toward the majority class, the same effect Gamze saw with NB on LD. On sentiment, kNN-on-LaBSE (0.644) still trails TF-IDF+LR (0.751).
+
+- **Date:** 2026-11-17
+- **Model and settings:** TF-IDF + L2 Logistic Regression; two-stage validation search over C and character n-gram range
+- **Result:** best setting for both tasks was C=30, ngram=(1, 2). Sentiment validation macro-F1 = 0.769, accuracy = 0.767. LD validation macro-F1 = 0.744, accuracy = 0.793. `results/tune_lr.csv`, `results/best_lr.csv`
+- **Observation:** tuned LR was the strongest validation model on both tasks. Test split was not used.

@@ -18,7 +18,6 @@ from pathlib import Path
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
-from sklearn.naive_bayes import MultinomialNB
 from sklearn.pipeline import make_pipeline
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
@@ -27,22 +26,19 @@ from data import ROOT, load_split  # noqa: E402
 
 
 def sentiment_model():
-    """Current best known sentiment model.
-
-    Replace settings here if M5 logistic-regression tuning finds
-    a better validation configuration.
+    """
+    Best M5 validation model for sentiment.
     """
     return make_pipeline(
-        TfidfVectorizer(analyzer="char", ngram_range=(1, 3)),
-        LogisticRegression(max_iter=1000),
+        TfidfVectorizer(analyzer="char", ngram_range=(1, 2)),
+        LogisticRegression(C=30, max_iter=1000),
     )
 
-
 def ld_model():
-    """Current best known LD model from M5 NB tuning."""
+    """Best M5 validation model for language detection."""
     return make_pipeline(
-        TfidfVectorizer(analyzer="char", ngram_range=(1, 3)),
-        MultinomialNB(alpha=0.003),
+        TfidfVectorizer(analyzer="char", ngram_range=(1, 2)),
+        LogisticRegression(C=30, max_iter=1000),
     )
 
 
