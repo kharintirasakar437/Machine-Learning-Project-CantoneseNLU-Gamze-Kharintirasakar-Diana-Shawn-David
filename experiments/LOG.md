@@ -58,6 +58,7 @@ Shared settings unless an entry says otherwise:
 - **Search space:** none (uses the settings chosen by the tuning scripts)
 - **Result:** sentiment: NB 0.749 [0.724, 0.776], LR 0.751 [0.725, 0.778]; paired LR − NB = +0.003 [−0.020, +0.025]. LD: NB 0.646 [0.621, 0.669], LR 0.599 [0.571, 0.626]; paired NB − LR = +0.047 [+0.020, +0.075]. Majority: 0.167 (sentiment), 0.268 (LD). `results/uncertainty_ci.csv`, `results/uncertainty_paired.csv`, `results/uncertainty_ci.png`
 - **Observation:** on sentiment, NB and LR cannot be told apart (the paired interval contains 0 and LR wins only 60% of resamples), while on LD tuned NB beats default LR in every resample. The intervals are about ±0.025, so differences under ~0.03 between single validation scores should not be reported as improvements. For LD, the group-level and sentence-level bootstraps gave almost the same width (SE 0.012 vs. 0.012 for NB).
+- **Observation:** on sentiment, NB and LR cannot be told apart (the paired interval contains 0 and LR wins only 60% of resamples), while on LD tuned NB beats default LR in every resample. The intervals are about ±0.025, so differences under ~0.03 between single validation scores should not be reported as improvements. For LD, the group-level and sentence-level bootstraps gave almost the same width (SE 0.012 vs. 0.012 for NB). This was the initial run using default LR because the tuned LR results were not yet available; the analysis was rerun with the final tuned LR settings on 2026-11-18 (see the verification entry below).
 
 ### 2026-11-17 — Learning curves (Diana Riyahi)
 - **Goal:** sensitivity of each model to the amount of training data; would more data help?
@@ -67,7 +68,24 @@ Shared settings unless an entry says otherwise:
 - **Search space:** training fraction ∈ {10%, 25%, 50%, 100%}
 - **Result:** validation macro-F1 (mean ± std over seeds) at 10 / 25 / 50 / 100%: sentiment LR 0.673±0.012 / 0.717±0.014 / 0.736±0.009 / 0.751, NB 0.691±0.013 / 0.721±0.002 / 0.738±0.002 / 0.749; LD LR 0.299±0.005 / 0.377±0.019 / 0.469±0.003 / 0.599, NB 0.436±0.012 / 0.477±0.010 / 0.518±0.007 / 0.646. `results/learning_curves.csv`, `results/learning_curves_summary.csv`, `results/learning_curves.png`
 - **Observation:** sentiment is flattening (+0.015 from 50% to 100%) with a train–validation gap of 0.20–0.25, so more data of the same kind would help only a little and the models mainly overfit; LD is still rising steeply (+0.13 from 50% to 100% for both models), so LD is data-limited, and LR on LD barely fits its own training data (train 0.62), which matches the underfitting found in M4. Seed-to-seed spread (≤ 0.02) is smaller than the bootstrap intervals.
-- **Date:** 2026-11-17
-- **Model and settings:** TF-IDF + L2 Logistic Regression; two-stage validation search over C and character n-gram range
-- **Result:** best setting for both tasks was C=30, ngram=(1, 2). Sentiment validation macro-F1 = 0.769, accuracy = 0.767. LD validation macro-F1 = 0.744, accuracy = 0.793. `results/tune_lr.csv`, `results/best_lr.csv`
-- **Observation:** tuned LR was the strongest validation model on both tasks. Test split was not used.
+- **Observation:** sentiment is flattening (+0.015 from 50% to 100%) with a train–validation gap of 0.20–0.25, so more data of the same kind would help only a little and the models mainly overfit; LD is still rising steeply (+0.13 from 50% to 100% for both models), so LD is data-limited, and LR on LD barely fits its own training data (train 0.62), which matches the underfitting found in M4. Seed-to-seed spread (≤ 0.02) is smaller than the bootstrap intervals. This was the initial run using default LR; the learning curves were rerun with the final tuned LR settings on 2026-11-18 (see the verification entry below).
+
+### 2026-11-17 — Logistic-regression tuning (David Zajac)
+- **Goal:** tune the logistic-regression baseline for both tasks and identify the strongest validation configuration for the Milestone 5 model comparison
+- **Script / command:** `python scripts/tune_lr.py`; `python scripts/main_results.py`
+- **Task(s):** sentiment, LD
+- **Model and settings:** TF-IDF character features + L2 LogisticRegression; final selected configuration C = 30, char 1–2-grams
+- **Search space:** C ∈ {0.1, 0.3, 1, 3, 10, 30, 100}; character n-gram range ∈ {(1,1), (1,2), (1,3), (1,4)}
+- **Selection rule:** highest validation macro-F1; ties prefer smaller C
+- **Result:** best setting for both tasks was C = 30, ngram = (1, 2). Sentiment validation macro-F1 = 0.769, accuracy = 0.767; LD validation macro-F1 = 0.744, accuracy = 0.793. Outputs: `results/tune_lr.csv`, `results/best_lr.csv`, `results/main_results_valid.csv`, `results/main_results_valid.png`
+- **Observation:** tuned LR was the strongest validation model on both tasks and improved over the default LR configuration, especially on language detection. The test split was not used.
+
+### 2026-11-18 — Tuned-model uncertainty and learning-curve verification (David Zajac)
+- **Goal:** verify that Diana’s uncertainty and learning-curve analyses use the final tuned LR settings and produce results consistent with the main validation comparison
+- **Script / command:** `python scripts/uncertainty.py`; `python scripts/learning_curves.py --jobs 1`
+- **Task(s):** sentiment, LD
+- **Model and settings:** tuned TF-IDF + NB and tuned TF-IDF + LR; LR uses C = 30, char 1–2-grams
+- **Search space:** training fraction ∈ {10%, 25%, 50%, 100%} for learning curves; bootstrap B = 1000 for uncertainty analysis
+- **Selection rule:** fixed hyperparameters from prior tuning; no new model selection performed
+- **Result:** sentiment LR macro-F1 = 0.769 with 95% bootstrap CI [0.743, 0.792]; LD LR macro-F1 = 0.744 with 95% bootstrap CI [0.725, 0.763]. Paired LR − NB difference = 0.020 [−0.006, 0.044] for sentiment and 0.098 [0.076, 0.122] for LD. The serial learning-curve run reproduced the final full-data scores exactly: sentiment 0.769 and LD 0.744.
+- **Observation:** the serial rerun resolved the earlier LD 0.747 vs 0.744 discrepancy. Tuned LR remained strongest on both tasks; the sentiment LR–NB gap was small and its paired interval crossed zero, while the LD advantage was larger and clearly above zero. The test split was not used.

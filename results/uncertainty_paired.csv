@@ -1,5 +1,5 @@
 task,best_model,other_model,diff_macro_f1,diff_lo,diff_hi,p_best_not_better,resample_unit,n_boot
-sentiment,tfidf + LR (default),majority,0.585,0.557,0.613,0.000,sentence,1000
-sentiment,tfidf + LR (default),tfidf + NB (tuned),0.003,-0.020,0.025,0.399,sentence,1000
-ld,tfidf + NB (tuned),majority,0.378,0.353,0.401,0.000,source_id,1000
-ld,tfidf + NB (tuned),tfidf + LR (default),0.047,0.020,0.075,0.000,source_id,1000
+sentiment,tfidf + LR (tuned),majority,0.602,0.575,0.629,0.000,sentence,1000
+sentiment,tfidf + LR (tuned),tfidf + NB (tuned),0.020,-0.006,0.044,0.068,sentence,1000
+ld,tfidf + LR (tuned),majority,0.476,0.457,0.495,0.000,source_id,1000
+ld,tfidf + LR (tuned),tfidf + NB (tuned),0.098,0.076,0.122,0.000,source_id,1000
