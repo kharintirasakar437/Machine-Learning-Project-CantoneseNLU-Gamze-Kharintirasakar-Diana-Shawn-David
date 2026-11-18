@@ -1,12 +1,15 @@
-"""Main results table and figure for all models, from one script (validation split only).
+"""Main results table and figure for all models (validation split only).
 
-Every model is refitted on the train split with the settings chosen on the validation split
-by the tuning scripts, then scored on the validation split, so the table regenerates from code:
-  - NB:  best row of results/tune_nb_ngram.csv   (scripts/tune_nb.py, tune_nb_ngram.py)
-  - LR:  results/best_lr.csv                     (scripts/tune_lr.py)
-  - kNN: best k in results/tune_knn_labse.csv    (scripts/knn_labse.py; LaBSE embeddings cached)
-Majority and stratified-random are the naive benchmarks (stratified: mean of seeds 3052-3054).
+Classical models are refitted on the train split using settings selected on validation.
+LaBSE+kNN metrics are read from the committed validation tuning results produced by
+scripts/knn_labse.py, which used the same train/validation protocol and frozen embeddings.
 
+Sources:
+  - NB: results/tune_nb_ngram.csv
+  - LR: results/best_lr.csv
+  - kNN: results/tune_knn_labse.csv
+
+Majority and stratified-random are the naive benchmarks.
 The test split is NOT used here; it stays locked until the final report.
 Run from the repository root, after the tuning scripts have run:
     python scripts/main_results.py
@@ -92,8 +95,21 @@ def run_task(task):
     ngram, c = ast.literal_eval(lr["ngram_range"]), float(lr["C"])
     add("tfidf + LR (tuned)", evaluate(lr_pipeline(c, ngram), train, valid), f"C={c:g}, ngram={ngram}")
 
-    k = int(best_row("tune_knn_labse.csv", task)["k"])
-    add("LaBSE + kNN", knn_metrics(task, train, valid, k), f"k={k}")
+    knn = best_row("tune_knn_labse.csv", task)
+    k = int(knn["k"])
+
+    knn_result = {
+        "accuracy": float(knn["accuracy"]),
+        "macro_f1": float(knn["macro_f1"]),
+        "micro_f1": float(knn["micro_f1"]),
+        "weighted_f1": float(knn["weighted_f1"]),
+    }
+
+    add(
+        "LaBSE + kNN",
+        knn_result,
+        f"k={k}",
+)
     return rows
 
 

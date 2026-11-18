@@ -67,3 +67,7 @@ Shared settings unless an entry says otherwise:
 - **Search space:** training fraction ∈ {10%, 25%, 50%, 100%}
 - **Result:** validation macro-F1 (mean ± std over seeds) at 10 / 25 / 50 / 100%: sentiment LR 0.673±0.012 / 0.717±0.014 / 0.736±0.009 / 0.751, NB 0.691±0.013 / 0.721±0.002 / 0.738±0.002 / 0.749; LD LR 0.299±0.005 / 0.377±0.019 / 0.469±0.003 / 0.599, NB 0.436±0.012 / 0.477±0.010 / 0.518±0.007 / 0.646. `results/learning_curves.csv`, `results/learning_curves_summary.csv`, `results/learning_curves.png`
 - **Observation:** sentiment is flattening (+0.015 from 50% to 100%) with a train–validation gap of 0.20–0.25, so more data of the same kind would help only a little and the models mainly overfit; LD is still rising steeply (+0.13 from 50% to 100% for both models), so LD is data-limited, and LR on LD barely fits its own training data (train 0.62), which matches the underfitting found in M4. Seed-to-seed spread (≤ 0.02) is smaller than the bootstrap intervals.
+- **Date:** 2026-11-17
+- **Model and settings:** TF-IDF + L2 Logistic Regression; two-stage validation search over C and character n-gram range
+- **Result:** best setting for both tasks was C=30, ngram=(1, 2). Sentiment validation macro-F1 = 0.769, accuracy = 0.767. LD validation macro-F1 = 0.744, accuracy = 0.793. `results/tune_lr.csv`, `results/best_lr.csv`
+- **Observation:** tuned LR was the strongest validation model on both tasks. Test split was not used.
