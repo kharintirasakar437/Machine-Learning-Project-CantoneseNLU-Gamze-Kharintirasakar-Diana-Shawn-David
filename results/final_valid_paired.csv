@@ -1,0 +1,5 @@
+task,split,best_model,other_model,diff_macro_f1,diff_lo,diff_hi,p_best_not_better,n_boot
+sentiment,valid,tfidf + LR (tuned),majority,0.598,0.571,0.625,0.000,1000
+sentiment,valid,tfidf + LR (tuned),tfidf + NB (tuned),0.016,-0.009,0.040,0.108,1000
+ld,valid,tfidf + LR (tuned),majority,0.475,0.457,0.493,0.000,1000
+ld,valid,tfidf + LR (tuned),tfidf + NB (tuned),0.097,0.074,0.121,0.000,1000
